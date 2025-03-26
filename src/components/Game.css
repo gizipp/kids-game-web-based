@@ -1,0 +1,148 @@
+.game {
+  position: relative;
+  padding: 20px;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #1976d2;
+}
+
+.game-content {
+  margin-top: 60px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 2rem;
+}
+
+.option-button {
+  background-color: white;
+  border: 3px solid var(--secondary-color);
+  border-radius: 15px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.option-button:not(:disabled):hover {
+  transform: scale(1.05);
+  background-color: #e3f2fd;
+}
+
+.option-button.selected {
+  border-color: var(--secondary-color);
+  background-color: #e3f2fd;
+}
+
+.option-button.correct {
+  border-color: #4CAF50;
+  background-color: #e8f5e9;
+  animation: correctPulse 1s ease;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.option-button.correct::before,
+.option-button.correct::after {
+  content: '⭐';
+  position: absolute;
+  font-size: 1.5rem;
+  animation: starBurst 1s ease-out forwards;
+  opacity: 0;
+}
+
+.option-button.correct::before {
+  top: -20px;
+  left: -20px;
+  animation-delay: 0.2s;
+}
+
+.option-button.correct::after {
+  bottom: -20px;
+  right: -20px;
+  animation-delay: 0.4s;
+}
+
+.option-button.incorrect {
+  border-color: #f44336;
+  background-color: #ffebee;
+  animation: incorrectShake 0.5s ease;
+  box-shadow: 0 0 20px rgba(244, 67, 54, 0.3);
+}
+
+.option-button.animate {
+  animation: correctPulse 1s ease;
+}
+
+.option-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+@keyframes correctPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes incorrectShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes starBurst {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .option-button {
+    font-size: 2.5rem;
+  }
+} 
